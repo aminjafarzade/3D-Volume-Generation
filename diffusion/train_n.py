@@ -139,7 +139,7 @@ def main(args):
 
             step += 1
             # pbar.update(1)
-        if i % 10 == 0:
+        if i % 1 == 0:
             ddpm.eval()
             autoencoder.eval()
             print(f'Epoch {i} is done')
@@ -173,6 +173,6 @@ if __name__ == "__main__":
     parser.add_argument("--cfg_dropout", type=float, default=0.1)
     parser.add_argument("--dataset_path", type=str, default='/data/hdf5_data')
     parser.add_argument("--ae_ckpt_path", type=str,
-                        default='/root/Diffusion-Project-3DVolume/diffusion/model_199.pt')
+                        default='/root/3D-Volume-Generation/model_2.pt')
     args = parser.parse_args()
     main(args)

@@ -36,7 +36,7 @@ def main(args):
     # TODO take path from terminal
     autoencoder = VAE3D128_diff_8().to('cuda')
     autoencoder.load_state_dict(torch.load(
-        "/root/Diffusion-Project-3DVolume/diffusion/model_199.pt", map_location="cuda"))
+       args.ae_ckpt_path, map_location="cuda"))
 
     # ----------------------------------------------
 
@@ -44,7 +44,7 @@ def main(args):
         sidx = i * args.batch_size
         eidx = min(sidx + args.batch_size, total_num_samples)
         # B = eidx - sidx
-        B = 1000
+        B = 3
 
         if args.use_cfg:  # Enable CFG sampling
             assert ddpm.network.use_cfg, f"The model was not trained to support CFG."
@@ -72,8 +72,8 @@ if __name__ == "__main__":
     parser.add_argument("--use_cfg", action="store_true")
     parser.add_argument("--sample_method", type=str, default="ddpm")
     parser.add_argument("--cfg_scale", type=float, default=7.5)
-    parser.add_argument("--ae_ckpt_path", type=float,
-                        default='/root/Diffusion-Project-3DVolume/diffusion/model_199.pt')
+    parser.add_argument("--ae_ckpt_path", type=str,
+                        default='/root/3D-Volume-Generation/model_2.pt')
 
     args = parser.parse_args()
     main(args)
