@@ -119,6 +119,58 @@ We trained our model on the three categories and measured JSD, MMD, and COV. Bel
 #### Chair
 <img src='./assets/chair_vis.png' width="400">
 
+## Implementation Details
+1. Environment Setup
+
+```bash
+conda env create -f environment.yml
+conda activate 3d_volume
+```
+
+<!-- Make sure to set the dataset directory path inside each training script as needed. -->
+
+2. Training the AutoEncoder
+
+File: autoencoder.py
+Run:
+```bash
+python autoencoder.py --dataset_path {PATH/TO/DATASET} --ckpt_path {PLACE/TO/PUT/CKPT}
+```
+<!-- Edit paths for dataset loading/saving as necessary. -->
+3. Training the Latent Diffusion Model
+
+File: train_n.py (located in the diffusion folder)
+Example:
+```bash
+python train_n.py --use_cfg --dataset_path {PATH/TO/DATASET} --ae_ckpt_path {PATH/TO/AE/CKPT}
+```
+Make sure to load your AE checkpoints, set parameters, and specify the dataset path.
+
+4. Sampling
+
+File: sampling_n.py (in diffusion folder)
+Example:
+```bash
+python sampling_n.py --ldm_ckpt_path {PATH/TO/DIFFUSION/CKPT} --ae_ckpt_path {PATH/TO/AE/CKPT} --save_dir {PATH/TO/SAVE_DIR} --use_cfg
+```
+Loads the trained model and generates samples in latent space before decoding them to voxels.
+(Optional) Score Distillation Sampling
+
+File: main.py (in sds folder)
+Run:
+```bash
+python main.py --ldm_ckpt_path {PATH/TO/DIFFUSION/CKPT} --ae_ckpt_path {PATH/TO/AE/CKPT}
+```
+The SDS code is in sds_code folder. It currently handles one class at a time by manually changing the class label in model.py (line 43).
+Thresholding & Visualization
+
+After sampling, you can manually set thresholds and visualize results in visualization.ipynb.
+
+## Acknowledgements
+* Amin Jafarzade: Implemented the Latent Diffusion Model.
+* Toghrul Abbasov: Implemented the Autoencoder and initial SDS.
+* Experimentation, training, result evaluation, and analysis were collaborative efforts.
+
 <!-- ## Evaluation
 To assess the quality and diversity of the generated samples, we follow Achlioptas et al. [1] and use Jensen-Shannon Divergence (JSD), Minimum Matching Distance (MMD), and Coverage (COV). 
 
@@ -140,6 +192,6 @@ Compress your source code and the pdf file into a zip file and submit it.
 
 ## Acknowledgement mlb7TIotMd+2Pg==
 The dataset is from <a href=https://shapenet.org/ target="_blank">ShapeNet</a>.
-
+-->
 ## Reference
-[1] [Learning Representations and Generative Models for 3D Point Clouds](https://arxiv.org/abs/1707.02392) -->
+[1] [Learning Representations and Generative Models for 3D Point Clouds](https://arxiv.org/abs/1707.02392)
