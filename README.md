@@ -28,11 +28,10 @@ We use three categories from the ShapeNet dataset: airplanes (2,658 shapes), cha
 To set up your environment and preprocess the data:
 
 1. **Install the dependencies**:
-   ```bash
-   pip install -r requirements.txt
-
-  python load_data.py
-  ```
+   ```bash 
+    pip install -r requirements.txt
+    python load_data.py
+   ```
 
 __If the ShapeNet download link is not accessible or you encounter an error running `load_data.py`, please download the dataset on your local machine from [here](https://onedrive.live.com/?authkey=%21AFhw6N804-SPITU&id=0CE615B143FC4BDC%21188222&cid=0CE615B143FC4BDC) and send the file to your remote server. You have two options: either download `hdf5_data.zip`, the original ShapeNet dataset, and run `load_data.py` for pre-processing, or directly download `.npy` files. Note that downloading the `.npy` files may take longer.__ 
 
