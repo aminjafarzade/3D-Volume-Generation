@@ -103,10 +103,11 @@ python eval.py {CATEGORY} {PATH/TO/YOUR_SAMPLE_DATA.NPY}
 ## Results
 We trained our model on the three categories and measured JSD, MMD, and COV. Below are the final metrics:
 
-Category	JSD	MMD	COV
-Table	0.0879	0.0054	0.2047
-Airplane	0.0672	0.0023	0.3688
-Chair	0.0847	0.0056	0.2690
+| Category | JSD | MMD | COV |
+|:------------------:|:-----------------:|:-----------------:|:-----------------:|
+| Table| 0.0879 | 0.0054 | 0.2047 |
+| Airplane | 0.0672 | 0.0023 | 0.3688 |
+| Chair | 0.0847 | 0.0056 | 0.2690 |
 
 ### Sample Visualizations
 * Tables <br>(Insert images or links here)
