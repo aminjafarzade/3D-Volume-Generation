@@ -110,9 +110,9 @@ We trained our model on the three categories and measured JSD, MMD, and COV. Bel
 | Chair | 0.0847 | 0.0056 | 0.2690 |
 
 ### Sample Visualizations
-* <img src='./assets/table_vis.png' width="250">
-* <img src='./assets/airplane_vis.png' width="250">
-* <img src='./assets/chair_vis.png' width="250">
+* <img src='./assets/table_vis.png' width="400">
+* <img src='./assets/airplane_vis.png' width="400">
+* <img src='./assets/chair_vis.png' width="400">
 
 <!-- ## Evaluation
 To assess the quality and diversity of the generated samples, we follow Achlioptas et al. [1] and use Jensen-Shannon Divergence (JSD), Minimum Matching Distance (MMD), and Coverage (COV). 
