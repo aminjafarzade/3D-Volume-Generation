@@ -154,7 +154,8 @@ Example:
 python sampling_n.py --ldm_ckpt_path {PATH/TO/DIFFUSION/CKPT} --ae_ckpt_path {PATH/TO/AE/CKPT} --save_dir {PATH/TO/SAVE_DIR} --use_cfg
 ```
 Loads the trained model and generates samples in latent space before decoding them to voxels.
-(Optional) Score Distillation Sampling
+
+5. (Optional) Score Distillation Sampling
 
 File: main.py (in sds folder)
 Run:
