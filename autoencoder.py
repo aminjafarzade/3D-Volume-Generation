@@ -2,16 +2,19 @@ from diffusion.data import Dataset_3d
 from tqdm import tqdm
 import os
 import numpy as np
+import sys
+
+sys.path.append('/root/3D-Volume-Generation/dataset')
+
 from voxel_data import VoxelDataset
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 from torch.utils.data import DataLoader, Dataset
-import sys
 import argparse
 # sys.path is a list of absolute path strings
-sys.path.append('/root/Diffusion-Project-3DVolume/dataset')
+
 # device = 'cuda'
 
 
@@ -23,90 +26,6 @@ class Lambda(nn.Module):
     def forward(self, x):
         return self.function(x)
 
-
-# class VAE3D128_diff(nn.Module):
-#     def __init__(self):
-#         super(VAE3D128_diff, self).__init__()
-
-#         #Encoder
-#         self.encoder = nn.Sequential(
-#             nn.Conv3d(in_channels = 1, out_channels = 12, kernel_size = 4, stride = 2, padding = 1),
-#             nn.BatchNorm3d(12),
-#             nn.LeakyReLU(negative_slope=0.2, inplace=True),
-
-#             nn.Conv3d(in_channels = 12, out_channels = 24, kernel_size = 3, stride = 1, padding = 1),
-#             nn.BatchNorm3d(24),
-#             nn.LeakyReLU(negative_slope=0.2, inplace=True),
-
-#             nn.Conv3d(in_channels = 24, out_channels = 24, kernel_size = 4, stride = 2, padding = 1),
-#             nn.BatchNorm3d(24),
-#             nn.LeakyReLU(negative_slope=0.2, inplace=True),
-
-#             nn.Conv3d(in_channels = 24, out_channels = 48, kernel_size = 3, stride = 1, padding = 1),
-#             nn.BatchNorm3d(48),
-#             nn.LeakyReLU(negative_slope=0.2, inplace=True),
-
-#             nn.Conv3d(in_channels = 48, out_channels = 16, kernel_size = 3, stride = 1, padding = 1),
-
-
-#             # nn.Conv3d(in_channels = 96, out_channels = 128, kernel_size = 4, stride = 1),
-#             # nn.BatchNorm3d(128),
-#             # nn.LeakyReLU(negative_slope=0.2, inplace=True),
-
-#             # Lambda(lambda x: x.reshape(x.shape[0], -1)),
-
-#             # nn.Linear(in_features = 24, out_features=16)
-#         )
-
-#         # self.bottleneck=nn.Sequential(
-#         #     nn.Linear(in_features = 64, out_features=128),
-#         #     nn.BatchNorm1d(128),
-#         #     nn.LeakyReLU(negative_slope=0.2, inplace=True)
-#         # )
-
-#         self.decoder = nn.Sequential(
-#             # nn.Linear(in_features = 16, out_features=48),
-#             # nn.BatchNorm1d(48),
-#             # nn.LeakyReLU(negative_slope=0.2, inplace=True),
-
-#             # Lambda(lambda x: x.reshape(-1, 48, 1, 1, 1)),
-#             nn.ConvTranspose3d(in_channels = 16, out_channels = 48, kernel_size = 3, stride = 1, padding=1),
-#             nn.BatchNorm3d(48),
-#             nn.LeakyReLU(negative_slope=0.2, inplace=True),
-
-#             nn.ConvTranspose3d(in_channels = 48, out_channels = 24, kernel_size = 3, stride = 1, padding=1),
-#             nn.BatchNorm3d(24),
-#             nn.LeakyReLU(negative_slope=0.2, inplace=True),
-
-#             nn.ConvTranspose3d(in_channels = 24, out_channels = 24, kernel_size = 4, stride = 2, padding=1),
-#             nn.BatchNorm3d(24),
-#             nn.LeakyReLU(negative_slope=0.2, inplace=True),
-
-#             nn.ConvTranspose3d(in_channels = 24, out_channels = 12, kernel_size = 3, stride = 1, padding = 1),
-#             nn.BatchNorm3d(12),
-#             nn.LeakyReLU(negative_slope=0.2, inplace=True),
-
-#             nn.ConvTranspose3d(in_channels = 12, out_channels = 1, kernel_size = 4, stride = 2, padding = 1),
-#             # nn.BatchNorm3d(24),
-#             # nn.LeakyReLU(negative_slope=0.2, inplace=True),
-
-#             # nn.ConvTranspose3d(in_channels = 24, out_channels = 1, kernel_size = 4, stride = 2, padding = 1),
-#             nn.Sigmoid()
-#         )
-
-#     def forward(self, x):
-#         # x = x.reshape((-1, 1, 64, 64, 64))
-#         # print(x.shape)
-#         z = self.encoder(x)
-#         # print(z.shape)
-#         # print(z.shape)
-#         # z=self.bottleneck(z)
-#         # print(z.shape)
-#         # z=z.reshape(-1, 128, 1, 1, 1)
-#         # print(z.shape)
-
-#         out = self.decoder(z)
-#         return out
 
 class VAE3D128_diff_8(nn.Module):
     def __init__(self):
@@ -268,7 +187,7 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--ckpt_path", type=str,
-                        default="/data/ae_ckpts")
+                        default="root/3D-Volume-Generation")
     parser.add_argument("--dataset_path", type=str, default='/data/hdf5_data')
     parser.add_argument("--batch_size", type=int, default=64)
     parser.add_argument("--num_epochs", type=int, default=5000)
