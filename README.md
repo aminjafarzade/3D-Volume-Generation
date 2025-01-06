@@ -110,7 +110,7 @@ We trained our model on the three categories and measured JSD, MMD, and COV. Bel
 | Chair | 0.0847 | 0.0056 | 0.2690 |
 
 ### Sample Visualizations
-* ![Tables](<img src='3D-Volume-Generation/assets/table_vis.png/'>)
+* ![Tables](<img src="3D-Volume-Generation/assets/table_vis.png"> )
 * ![Airplanes](3D-Volume-Generation/assets/airplane_vis.png)
 * ![Chair](3D-Volume-Generation/assets/chair_vis.png)
 
